@@ -2,6 +2,7 @@ package main;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import Controleur.Controleur;
 import Model.Model;
 import View.WindowsView;
 import timer.TimerListing;
@@ -18,6 +19,8 @@ public class Main {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		f.pack();
+		Controleur c = new Controleur(model, wv);
+		model.addObserver(c);
 		new Timer(FREC , new TimerListing(model)).start();
 		while(true);
 	}

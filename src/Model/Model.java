@@ -33,6 +33,10 @@ public class Model extends Observable implements Serializable {
 	
 	public void majMap(HashMap<String, Plugin> newMap)
 	{
-		mapPlugins = newMap;
+		if( ! newMap.equals(mapPlugins))
+		{
+			mapPlugins = newMap;
+			notify();
+		}
 	}
 }

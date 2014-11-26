@@ -22,7 +22,6 @@ public class WindowsView extends JPanel implements Observer {
 	private static final long serialVersionUID = 1L;
 
 	private static Model model;
-	private Controleur controleur;
 
 	protected JMenuBar menuBar = new JMenuBar();
 	protected JMenu file = new JMenu("File");
@@ -36,7 +35,6 @@ public class WindowsView extends JPanel implements Observer {
 	//		new ImageIcon("src/Image/sauvegarde.png"));
 	public WindowsView() {
 		model = new Model();
-		controleur = new Controleur(model);
 		init();
 	}
 
