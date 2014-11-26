@@ -2,7 +2,6 @@ package file;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -27,7 +26,7 @@ public class FilterPluginFiles implements FilenameFilter {
 					URL[] urls = { url };
 					urlLoader = new URLClassLoader(urls);
 					name = name.replace(".class","").replace("/",".");
-					Class<?> classP = urlLoader.loadClass(name);
+					urlLoader.loadClass(name);
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

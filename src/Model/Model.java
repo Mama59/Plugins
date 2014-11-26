@@ -33,10 +33,27 @@ public class Model extends Observable implements Serializable {
 	
 	public void majMap(HashMap<String, Plugin> newMap)
 	{
-		if( ! newMap.equals(mapPlugins))
+		System.out.println("maj");
+		System.out.println("notify");
+		for(String pl : newMap.keySet())
 		{
-			mapPlugins = newMap;
-			notify();
+			if(!mapPlugins.containsKey(pl))
+			{
+				HashMap<Boolean, Plugin> rep = new HashMap<>();
+				rep.put(true, newMap.get(pl));
+ 				notifyObservers(rep);
+			}
 		}
+		for(String pl : mapPlugins.keySet())
+		{
+			if(!newMap.containsKey(pl))
+			{
+				HashMap<Boolean, Plugin> rep = new HashMap<>();
+				rep.put(false, mapPlugins.get(pl));
+ 				notifyObservers(rep);
+			}
+		}
+		mapPlugins = newMap;
+		
 	}
 }
