@@ -1,28 +1,38 @@
 package main;
+import java.io.File;
+
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import file.MyPluginAdapter;
+import file.PluginFinder;
+import Model.CurrentPlugins;
 import Model.Model;
-import ObserverModel.ObserverModel;
 import View.WindowsView;
 import timer.TimerListing;
 
 
 public class Main {
 	private static final int FREC = 1000 ;
+
+	private static PluginFinder finder;
 	public static void main(String[] args) 
 	{
+		String directoryPlugins = "dropins/plugins";
+		File file = new File(directoryPlugins);
 		Model model = new Model();
+		CurrentPlugins currentPlugins = new CurrentPlugins();
+		MyPluginAdapter pluginAdapter = new MyPluginAdapter(currentPlugins);
+		
+		WindowsView wv = new WindowsView(model, currentPlugins);
 		JFrame f = new JFrame("Plugins For Text");
-		WindowsView wv = new WindowsView();
-	
-	 	f.getContentPane().add(wv);
+		f.getContentPane().add(wv);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
 		f.pack();
-		ObserverModel c = new ObserverModel(model, wv);
-		model.addObserver(c);
-		new Timer(FREC , new TimerListing(model)).start();
-		while(true);
+		finder = new PluginFinder(file);
+		finder.addPluginFinderListener(pluginAdapter);
+		finder.addPluginFinderListener(wv);
+		new Timer(FREC , new TimerListing(finder)).start();
 	}
 }
