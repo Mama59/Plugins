@@ -1,4 +1,4 @@
-package file;
+package filter;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
+import plugin.listener.PluginListener;
 import plugin.Plugin;
 
 
@@ -28,8 +28,14 @@ public class PluginFinder {
 		this.filter = new FilterPluginFiles();
 	}
 	public synchronized void addPluginFinderListener(PluginListener l) {
-		if (pluginListeners.contains(l)) { return ; }
-		pluginListeners.add(l);
+		if (pluginListeners.contains(l)) 
+		{ 
+			return; 
+		}
+		else
+		{
+			pluginListeners.add(l);
+		}
 	}
 	
 	public synchronized void removePluginListener(PluginListener l){
@@ -81,41 +87,41 @@ public class PluginFinder {
 		return null;
 	}
 	
-	private void firePluginAdded(Plugin p, String name)
+	private void firePluginAdded(Plugin p)
 	{
 		ArrayList<PluginListener> pl =  new ArrayList<PluginListener>(pluginListeners) ; 
 		if (pl.size() == 0) { return ; }
-		PluginEvent event = new PluginEvent(this, p, name) ;
+		PluginEvent event = new PluginEvent(this, p) ;
 		for (PluginListener listener : pl) {
 			listener.pluginAdded(event);
 		}
 	}
 	
-	private void firePluginRemoved(Plugin p, String name)
+	private void firePluginRemoved(Plugin p)
 	{
 		ArrayList<PluginListener> pl =  new ArrayList<PluginListener>(pluginListeners) ; 
 		if (pl.size() == 0) { return ; }
-		PluginEvent event = new PluginEvent(this, p, name) ;
+		PluginEvent event = new PluginEvent(this, p) ;
 		for (PluginListener listener : pl) {
 			listener.pluginRemoved(event); 
 		}
 	}
 	
-	public void addPlugin(Map<String, Plugin> setPlugin) {
-		for(String name : setPlugin.keySet())
-			firePluginAdded(setPlugin.get(name), name); 
+	public void addPlugin(Set<Plugin> setPlugin) {
+		for(Plugin p : setPlugin)
+			firePluginAdded(p); 
 	}
 	
-	public void removePlugin(Map<String, Plugin> setPlugin) {
-		for(String name : setPlugin.keySet())
-			firePluginRemoved(setPlugin.get(name), name); 
+	public void removePlugin(Set<Plugin> setPlugin) {
+		for(Plugin p : setPlugin)
+			firePluginRemoved(p); 
 	}
 	
-	public void addPlugin(Plugin p, String name) {
-			firePluginAdded(p, name); 
+	public void addPlugin(Plugin p) {
+			firePluginAdded(p); 
 	}
 	
-	public void removePlugin(Plugin p, String name) {
-			firePluginRemoved(p, name); 
+	public void removePlugin(Plugin p) {
+			firePluginRemoved(p); 
 	}
 }

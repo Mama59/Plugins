@@ -1,14 +1,8 @@
-package Model;
+package model;
 
-import java.io.Serializable;
-import java.util.Observable;
 
-public class Model extends Observable implements Serializable {
+public class Model {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String myString;
 	
 	public Model() 
