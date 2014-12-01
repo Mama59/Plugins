@@ -3,7 +3,6 @@ package Test.filter;
 import static org.junit.Assert.*;
 
 import java.io.File;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,11 +13,10 @@ import filter.PluginEvent;
 import filter.PluginFinder;
 
 public class TestPluginEvent {
-	PluginEvent event;
-	PluginFinder source;
-	File file;
-	Set<String> list; 
-	Plugin p;
+	private PluginEvent event;
+	private PluginFinder source;
+	private File file;
+	private Plugin p;
 	@Before
 	public void init()
 	{
@@ -48,5 +46,13 @@ public class TestPluginEvent {
 	public void testToString()
 	{
 		assertEquals(event.toString(), "PluginEvent [plugin=" + event.getPlugin() + "]");
+	}
+	public PluginEvent getPluginEvent()
+	{
+		return event;
+	}
+	public Plugin getPlugin()
+	{
+		return p;
 	}
 }

@@ -8,7 +8,7 @@ import model.Model;
 import plugin.CurrentPlugins;
 import plugin.listener.MyPluginAdapter;
 import filter.PluginFinder;
-import timer.TimerListingListener;
+import timer.TimerListingMyAdapter;
 import view.WindowsView;
 
 
@@ -26,7 +26,7 @@ public class Main {
 		PluginFinder finder = new PluginFinder(file);
 		finder.addPluginFinderListener(pluginAdapter);
 		finder.addPluginFinderListener(wv);
-		new Timer(FREC , new TimerListingListener(finder)).start();
+		new Timer(FREC , new TimerListingMyAdapter(finder)).start();
 		JFrame f = new JFrame("Plugins For Text");
 		f.getContentPane().add(wv);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -45,6 +45,5 @@ public class TestPluginFinder {
 	{
 		Plugin p = new PluginForTry("test");
 		finder.addPlugin(p);
-		System.out.println(finder.getPlugin("test"));
 	}
 }

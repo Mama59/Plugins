@@ -6,9 +6,8 @@ import filter.PluginEvent;
 
 public class MyPluginAdapter extends plugin.listener.PluginAdapter{
 
-	private CurrentPlugins currentPlugins;
-
-	public MyPluginAdapter(CurrentPlugins currentPlugins) {
+	public MyPluginAdapter(CurrentPlugins currentPlugins) 
+	{
 		super();
 		this.currentPlugins = currentPlugins;
 	}
@@ -22,4 +21,9 @@ public class MyPluginAdapter extends plugin.listener.PluginAdapter{
 	{
 		currentPlugins.removePlugin(event.getName());
 	}
+
+	public CurrentPlugins getCurrentPlugins() {
+		return currentPlugins;
+	}
+	
 }

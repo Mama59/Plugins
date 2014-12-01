@@ -1,27 +1,34 @@
 package timer;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 import plugin.Plugin;
 import filter.*;
-
-public class TimerListingListener implements ActionListener {
+public class TimerListingMyAdapter extends  TimerListingAdapter {
 	
-	private HashMap<String, Plugin> listClass = new HashMap<String, Plugin>();
+	private HashMap<String, Plugin> listClass;
 	
 	private PluginFinder finder;
 	
-	public TimerListingListener(PluginFinder finder) {
+	public TimerListingMyAdapter(PluginFinder finder) {
 		listClass = new HashMap<String, Plugin>();
 		this.finder = finder; 
 	}
 
+	public HashMap<String, Plugin> getListClass() {
+		return listClass;
+	}
+
+	public PluginFinder getFinder() {
+		return finder;
+	}
+
 	public void actionPerformed(ActionEvent event) 
 	{
+		
 		Set<String> listClassActual = finder.getContentClass();	
 		Set<Plugin> newPlugins = new HashSet<Plugin>();
 		Set<Plugin> oldPlugins = new HashSet<Plugin>();
