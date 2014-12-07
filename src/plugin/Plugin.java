@@ -9,7 +9,7 @@ package plugin;
  */
 public interface Plugin {
 	/** the package name of plugins */
-	public static final Object PACKAGE_NAME = "plugins";
+	public static final String PACKAGE_NAME = "plugins";
 	
 	/** performs a transformation on a string 
 	 * @param s the string to be transformed

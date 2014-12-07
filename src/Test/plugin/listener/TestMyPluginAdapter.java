@@ -6,13 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import plugin.CurrentPlugins;
+import plugin.PluginEvent;
 import plugin.listener.MyPluginAdapter;
 import plugin.listener.PluginAdapter;
 import Test.filter.TestPluginEvent;
-import filter.PluginEvent;
-
+/**
+ * Test my plugin adapter extends testPluginadapter
+ * */
 public class TestMyPluginAdapter extends TestPluginAdapter {
 	protected MyPluginAdapter pluginAdapter;
+	
 	@Before
 	public void init()
 	{

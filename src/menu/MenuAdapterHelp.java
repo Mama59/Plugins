@@ -7,6 +7,11 @@ import javax.swing.JOptionPane;
 import plugin.CurrentPlugins;
 import plugin.Plugin;
 
+/**
+ *  class MenuAdapterHelp extends MenuAdapter
+ *  show dialog with helpMessage
+ *
+ */
 public class MenuAdapterHelp extends MenuAdapter {
 	private CurrentPlugins plugins;
 	public MenuAdapterHelp(CurrentPlugins plugins) {

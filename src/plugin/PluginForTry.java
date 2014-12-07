@@ -1,6 +1,9 @@
 package plugin;
-
+/**
+ * Plugin use for Tests
+ * */
 public class PluginForTry implements Plugin {
+	
 	String label;
 	public PluginForTry(String name) {
 		// TODO Auto-generated constructor stub

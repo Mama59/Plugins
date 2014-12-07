@@ -8,12 +8,14 @@ import javax.swing.JMenuItem;
 import org.junit.Before;
 import org.junit.Test;
 
-import filter.PluginFinder;
 import plugin.CurrentPlugins;
 import plugin.Plugin;
+import plugin.listener.PluginFinder;
 import menu.MenuAdapterHelp;
-
-public class TestMenuAdapterHelp implements TestMenuListener{
+/**
+ * Test for MenuAdapterHelp, extends TestMenuAdapter
+ * */
+public class TestMenuAdapterHelp extends TestMenuAdapter{
 	private MenuAdapterHelp adapter;
 	private CurrentPlugins currentPlugins;
 	private ActionEvent action;
@@ -21,6 +23,7 @@ public class TestMenuAdapterHelp implements TestMenuListener{
 	private int id;
 	private Plugin p;
 	PluginFinder src;
+	@Override
 	@Before
 	public void init()
 	{
@@ -30,6 +33,7 @@ public class TestMenuAdapterHelp implements TestMenuListener{
 		adapter = new MenuAdapterHelp(currentPlugins);
 	 	src = new PluginFinder(new File("dropinsTest/plugins"));
 	}
+	@Override
 	@Test
 	public void testOk()
 	{
@@ -39,8 +43,9 @@ public class TestMenuAdapterHelp implements TestMenuListener{
 		action = new ActionEvent(source, id, p.getLabel());
 		adapter.actionPerformed(action);
 	}
+	@Override
 	@Test
-	public void testNot()
+	public void testNotOk()
 	{
 		action = new ActionEvent(source, id, "test.class");
 		adapter.actionPerformed(action);

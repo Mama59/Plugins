@@ -5,6 +5,11 @@ import java.awt.event.ActionEvent;
 import plugin.Plugin;
 import view.WindowsView;
 
+/**
+ * Class MenuAdapterTool extends MenuAdapter
+ * change the model text with pluginsSelected.transform
+ *
+ */
 public class MenuAdapterTool extends MenuAdapter {
 	private WindowsView view;
 	public MenuAdapterTool(WindowsView view) {

@@ -7,10 +7,13 @@ import javax.swing.Timer;
 import model.Model;
 import plugin.CurrentPlugins;
 import plugin.listener.MyPluginAdapter;
-import filter.PluginFinder;
+import plugin.listener.PluginFinder;
 import timer.TimerListingMyAdapter;
 import view.WindowsView;
-
+/**
+ * Main
+ * Create all the necessary object to use our plugins software
+ * */
 
 public class Main {
 	private static final int FREC = 1000 ;

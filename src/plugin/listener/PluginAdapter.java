@@ -1,8 +1,11 @@
 package plugin.listener;
 
 import plugin.CurrentPlugins;
-import filter.PluginEvent;
+import plugin.PluginEvent;
 
+/**
+ * class PluginAdapter
+ */
 public class PluginAdapter implements PluginListener {
 	protected CurrentPlugins currentPlugins;
 	public void pluginAdded(PluginEvent event) {}

@@ -6,3 +6,5 @@
 .classpath
 
 .settings/org.eclipse.core.resources.prefs
+
+src/.DS_Store

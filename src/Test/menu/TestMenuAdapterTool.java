@@ -14,12 +14,14 @@ import model.Model;
 import org.junit.Before;
 import org.junit.Test;
 
-import filter.PluginEvent;
-import filter.PluginFinder;
 import plugin.CurrentPlugins;
 import plugin.Plugin;
+import plugin.PluginEvent;
+import plugin.listener.PluginFinder;
 import view.WindowsView;
-
+/**
+ * Test for MenuAdapterTool extends TestMenuAdapter
+ * */
 public class TestMenuAdapterTool extends TestMenuAdapter{
 	WindowsView view;
 	Model model;
@@ -50,12 +52,14 @@ public class TestMenuAdapterTool extends TestMenuAdapter{
 		view.changeModel(test);
 		action = new ActionEvent(source, id, p.getLabel());
 	}
+	@Override
 	@Test
 	public void testActionChangeText()
 	{
 		adapter.actionPerformed(action);
 		assertNotEquals(test, view.getModelText());
 	}
+	@Override
 	@Test
 	public void testActionChange()
 	{

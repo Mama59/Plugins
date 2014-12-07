@@ -6,46 +6,62 @@ import java.util.HashSet;
 import java.util.Set;
 
 import plugin.Plugin;
-import filter.*;
+import plugin.listener.PluginFinder;
+
+/**
+ * class TimerListingMyAdapter *
+ */
 public class TimerListingMyAdapter extends  TimerListingAdapter {
 	
-	private HashMap<String, Plugin> listClass;
-	
+	private HashMap<String, Plugin> mapPlugins;	
 	private PluginFinder finder;
 	
+	/**
+	 * Constructor
+	 * @param finder
+	 */
 	public TimerListingMyAdapter(PluginFinder finder) {
-		listClass = new HashMap<String, Plugin>();
+		mapPlugins = new HashMap<String, Plugin>();
 		this.finder = finder; 
 	}
 
-	public HashMap<String, Plugin> getListClass() {
-		return listClass;
+	
+	/**
+	 * get list of classes 
+	 * @return HashMap<String, Plugin>
+	 */
+	public HashMap<String, Plugin> getMapPlugin() {
+		return mapPlugins;
 	}
 
+	/**
+	 * get finder
+	 * @return PluginFinder
+	 */
 	public PluginFinder getFinder() {
 		return finder;
 	}
 
+	
+	/**
+	 * 
+	 */
 	public void actionPerformed(ActionEvent event) 
 	{
-		
+		System.out.println(event);
 		Set<String> listClassActual = finder.getContentClass();	
 		Set<Plugin> newPlugins = new HashSet<Plugin>();
 		Set<Plugin> oldPlugins = new HashSet<Plugin>();
 		Set<String> old = new HashSet<String>();
 		for(String st : listClassActual)
 		{
-			if(listClass.containsKey(st))
-			{
-				
-			}
-			else
+			if(! mapPlugins.containsKey(st))
 			{
 				Plugin p = finder.getPlugin(st);
 				if(p != null)
 				{
 					newPlugins.add(p);
-					listClass.put(st,p);
+					mapPlugins.put(st,p);
 				}
 				else
 				{
@@ -53,26 +69,26 @@ public class TimerListingMyAdapter extends  TimerListingAdapter {
 				}
 			}
 		}
-		Set<String> keySetListClass = listClass.keySet();
+		Set<String> keySetListClass = mapPlugins.keySet();
 		for(String st :  keySetListClass)
 		{
 			if(! listClassActual.contains(st))
 			{
-				oldPlugins.add(listClass.get(st));
+				oldPlugins.add(mapPlugins.get(st));
 				old.add(st);
 			}
 		}
 		for(String s : old)
 		{
-			listClass.remove(s);
+			mapPlugins.remove(s);
 		}
 		if(! newPlugins.isEmpty())
 		{
-			finder.addPlugin(newPlugins);
+			finder.addPlugins(newPlugins);
 		}	
 		if(! oldPlugins.isEmpty())
 		{
-			finder.removePlugin(oldPlugins);
+			finder.removePlugins(oldPlugins);
 		}
 	}
 }

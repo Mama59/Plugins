@@ -6,7 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import plugin.PluginForTry;
-
+/**
+ * Test plugin for try
+ * */
 public class TestPluginForTry implements TestPlugin {
 
 	PluginForTry plugin;
