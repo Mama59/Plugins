@@ -1,6 +1,7 @@
 Test.filter
 Test.menu
 Test.model
+Test.open
 Test.plugin
 Test.plugin.listener
 Test.timer
@@ -12,6 +13,8 @@ model
 open
 plugin
 plugin.listener
+quit
 save
 timer
 view
+view.listener

@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
-
+/**
+ * exit my adapter extends exit Adapter
+ * have a JFrame to quit frame
+ * */
 public class ExitMyAdapter extends ExitAdapter{
 	private JFrame frame;
 	

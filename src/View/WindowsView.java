@@ -13,7 +13,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import open.OpenAdapterView;
 import open.OpenView;
 import menu.MenuAdapterHelp;
 import menu.MenuAdapterTool;
@@ -25,7 +24,8 @@ import plugin.CurrentPlugins;
 import plugin.PluginEvent;
 import plugin.listener.PluginListener;
 import quit.ExitMyAdapter;
-import save.SaveAdapterView;
+import save.OpenSaveListener;
+import save.OpenSaveMyAdapter;
 import save.SaveView;
 import view.listener.KeyAdapterOpenSave;
 
@@ -51,8 +51,7 @@ public class WindowsView extends JPanel implements PluginListener{
 	protected MenuAdapterTool controleurTool;
 	protected ModelModifier modelModifier;
 	protected ModelAdapterChange mac;
-	protected OpenAdapterView openListener;
-	protected SaveAdapterView saveListener;
+	protected OpenSaveListener openSaveListener;
 	protected OpenView openView;
 	protected SaveView saveView;
 	protected KeyModelAdapter keyListener;
@@ -102,8 +101,7 @@ public class WindowsView extends JPanel implements PluginListener{
 		controleurHelp = new MenuAdapterHelp(currentPlugins);
 		openView = new OpenView(model, modelModifier);
 		saveView = new SaveView(model);
-		openListener = new OpenAdapterView(openView);
-		saveListener = new SaveAdapterView(saveView);
+		openSaveListener = new OpenSaveMyAdapter(saveView, openView);
 		
 		mac = new ModelAdapterChange(this);
 		modelModifier.addModelFinderListener(mac);
@@ -120,8 +118,8 @@ public class WindowsView extends JPanel implements PluginListener{
 		JMenuItem openItem =  new JMenuItem("Open");
 		JMenuItem saveItem =  new JMenuItem("Save");
 		
-		saveItem.addActionListener(saveListener);
-		openItem.addActionListener(openListener);
+		saveItem.addActionListener(openSaveListener);
+		openItem.addActionListener(openSaveListener);
 		
 		file.add(openItem);
 		file.add(saveItem);

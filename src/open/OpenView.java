@@ -34,8 +34,9 @@ public class OpenView extends JFrame {
 	}
 /**
  * Open a text file
+ * @return File selectedFile
  */
-	public void doOpen() 
+	public File doOpen() 
 	{
 		if (fileDialog == null)
 			fileDialog = new JFileChooser();
@@ -45,7 +46,7 @@ public class OpenView extends JFrame {
 		fileDialog.setFileFilter(new FileNameExtensionFilter("TEXT FILES", "txt", "text"));
 		int option = fileDialog.showOpenDialog(this);
 		if (option != JFileChooser.APPROVE_OPTION)
-			return; // User canceled or clicked the dialog's close box.
+			return selectedFile; // User canceled or clicked the dialog's close box.
 		selectedFile = fileDialog.getSelectedFile();
 		BufferedReader lecteurAvecBuffer=null;
 		String ligne;
@@ -65,6 +66,6 @@ public class OpenView extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			    
+		return selectedFile;
 	}
 }

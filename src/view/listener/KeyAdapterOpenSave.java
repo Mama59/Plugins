@@ -2,6 +2,7 @@ package view.listener;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 
 import open.OpenView;
 import save.SaveView;
@@ -13,6 +14,7 @@ import save.SaveView;
 public class KeyAdapterOpenSave extends KeyAdapter{
 	private OpenView openView;
 	private SaveView saveView;
+	protected File selectedFile;
 	private boolean ctrl;
 	public KeyAdapterOpenSave(OpenView openView, SaveView saveView) 
 	{
@@ -21,6 +23,9 @@ public class KeyAdapterOpenSave extends KeyAdapter{
 		this.ctrl = false;
 	}
 
+	/**
+	 * Check if ctrl is released
+	 * */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -37,18 +42,23 @@ public class KeyAdapterOpenSave extends KeyAdapter{
 		if (ctrl) {
 			switch (e.getKeyChar()) {
 			case 's':
-				saveView.doSave();
+				selectedFile = saveView.doSave(selectedFile);
+				ctrl = false;
 				break;
 			case 'S':
-				saveView.doSave();
+				selectedFile = saveView.doSaveChange();
+				ctrl = false;
 				break;
 			case 'o':
-				openView.doOpen();
+				selectedFile = openView.doOpen();
+				ctrl = false;
 				break;
 			case 'O':
-				openView.doOpen();
+				selectedFile = openView.doOpen();
+				ctrl = false;
 				break;
 			}
+			
 		}
 	}
 }

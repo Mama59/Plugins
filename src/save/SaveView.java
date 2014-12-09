@@ -32,18 +32,25 @@ public class SaveView extends JFrame {
 /**
  * Open a text file
  */
-	public void doSave() 
+	public File doSave() 
 	{
 		if (fileDialog == null)
 			fileDialog = new JFileChooser();
 		
 		fileDialog.setDialogTitle("Select File to be Saved");
-		fileDialog.setSelectedFile(selectedFile);
-		fileDialog.setFileFilter(new FileNameExtensionFilter("TEXT FILES", "txt", "text"));
-		int option = fileDialog.showSaveDialog(this);
-		if (option != JFileChooser.APPROVE_OPTION)
-			return; // User canceled or clicked the dialog's close box.
-		selectedFile = fileDialog.getSelectedFile();
+		if(selectedFile == null)
+		{
+			fileDialog.setFileFilter(new FileNameExtensionFilter("TEXT FILES", "txt", "text"));
+			int option = fileDialog.showSaveDialog(this);
+			if (option != JFileChooser.APPROVE_OPTION)
+				return null; // User canceled or clicked the dialog's close box.
+			
+		}
+		else
+		{
+			fileDialog.setSelectedFile(selectedFile);
+		}
+		selectedFile = fileDialog.getSelectedFile();		
 		BufferedWriter lecteurAvecBuffer=null;
 		try {
 			lecteurAvecBuffer = new BufferedWriter (new FileWriter(selectedFile));
@@ -56,10 +63,15 @@ public class SaveView extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return selectedFile;
 	}
-	public void doSave(File f) 
+	public File doSave(File f) 
 	{
 		selectedFile = f;
-		doSave();
+		return doSave();
+	}
+	public File doSaveChange() 
+	{
+		return doSave(null);
 	}
 }
