@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -23,6 +24,7 @@ import model.ModelModifier;
 import plugin.CurrentPlugins;
 import plugin.PluginEvent;
 import plugin.listener.PluginListener;
+import quit.QuitMyAdapter;
 import save.SaveAdapterView;
 import save.SaveView;
 
@@ -53,7 +55,8 @@ public class WindowsView extends JPanel implements PluginListener{
 	protected OpenView openView;
 	protected SaveView saveView;
 	protected KeyModelAdapter keyListener;
-	
+	protected QuitMyAdapter quitListener;
+	protected JFrame frame;
 	/**
 	 * Constructor of the window
 	 * @param model
@@ -75,6 +78,15 @@ public class WindowsView extends JPanel implements PluginListener{
 	}
 
 	
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+		JMenuItem quitItem = new JMenuItem("Exit");
+		quitListener = new QuitMyAdapter(frame);
+		quitItem.addActionListener(quitListener);
+		file.add(quitItem);
+	}
+
+
 	/**
 	 * get the model modifier
 	 * @return ModelModifier
@@ -89,7 +101,6 @@ public class WindowsView extends JPanel implements PluginListener{
 	 */
 	private void init() {
 		// TODO Auto-generated method stub
-		
 		hashItemTool = new HashMap<String, JMenuItem>();
 		hashItemHelp = new HashMap<String, JMenuItem>();
 		modelModifier = new ModelModifier();
@@ -99,6 +110,7 @@ public class WindowsView extends JPanel implements PluginListener{
 		saveView = new SaveView(model);
 		openListener = new OpenAdapterView(openView);
 		saveListener = new SaveAdapterView(saveView);
+		
 		mac = new ModelAdapterChange(this);
 		modelModifier.addModelFinderListener(mac);
 		
@@ -107,22 +119,26 @@ public class WindowsView extends JPanel implements PluginListener{
 		text = new JTextArea(this.getHeight(), this.getWidth());
 		keyListener = new KeyModelAdapter(model, text);
 		text.addKeyListener(keyListener);
-		setLayout(new BorderLayout());
+		
 		JMenuItem openItem =  new JMenuItem("Open");
-		openItem.addActionListener(openListener);
-		file.add(openItem);
 		JMenuItem saveItem =  new JMenuItem("Save");
+
 		saveItem.addActionListener(saveListener);
+		openItem.addActionListener(openListener);
+		
+		file.add(openItem);
 		file.add(saveItem);
+		
 		menuBar.add(file);
 		menuBar.add(tool);
 		menuBar.add(help);
-		this.setVisible(true);
-		modelModifier.changeModel("test");
+		
+		setLayout(new BorderLayout());
 		this.setBackground(Color.white);
 		this.setLayout(new BorderLayout());
 		add(menuBar,"North");
 		add(text,"Center");
+		this.setVisible(true);
 	}
 	/**
 	 * added a plugin 

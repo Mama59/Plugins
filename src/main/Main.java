@@ -20,6 +20,7 @@ public class Main {
 
 	public static void main(String[] args) 
 	{
+		
 		String directoryPlugins = "dropins/plugins";
 		File file = new File(directoryPlugins);
 		Model model = new Model();
@@ -33,7 +34,9 @@ public class Main {
 		JFrame f = new JFrame("Plugins For Text");
 		f.getContentPane().add(wv);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		wv.setFrame(f);
 		f.setVisible(true);
 		f.pack();
+		
 	}
 }
