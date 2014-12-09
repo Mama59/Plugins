@@ -27,6 +27,7 @@ import plugin.listener.PluginListener;
 import quit.ExitMyAdapter;
 import save.SaveAdapterView;
 import save.SaveView;
+import view.listener.KeyAdapterOpenSave;
 
 /**
  * class WindowsView
@@ -94,14 +95,15 @@ public class WindowsView extends JPanel implements PluginListener{
 		// TODO Auto-generated method stub
 		hashItemTool = new HashMap<String, JMenuItem>();
 		hashItemHelp = new HashMap<String, JMenuItem>();
+		
 		modelModifier = new ModelModifier();
+		
 		controleurTool = new MenuAdapterTool(this);
 		controleurHelp = new MenuAdapterHelp(currentPlugins);
 		openView = new OpenView(model, modelModifier);
 		saveView = new SaveView(model);
 		openListener = new OpenAdapterView(openView);
 		saveListener = new SaveAdapterView(saveView);
-		
 		
 		mac = new ModelAdapterChange(this);
 		modelModifier.addModelFinderListener(mac);

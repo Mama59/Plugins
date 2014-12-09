@@ -1,11 +1,15 @@
-package view;
+package view.listener;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import open.OpenView;
 import save.SaveView;
-
+/**
+ * Key listener adapter to open save
+ * ctrl + s to save
+ * ctrl + o to open
+ * */
 public class KeyAdapterOpenSave extends KeyAdapter{
 	private OpenView openView;
 	private SaveView saveView;
@@ -33,19 +37,15 @@ public class KeyAdapterOpenSave extends KeyAdapter{
 		if (ctrl) {
 			switch (e.getKeyChar()) {
 			case 's':
-				System.out.println("save");
 				saveView.doSave();
 				break;
 			case 'S':
-				System.out.println("save");
 				saveView.doSave();
 				break;
 			case 'o':
-				System.out.println("open");
 				openView.doOpen();
 				break;
 			case 'O':
-				System.out.println("open");
 				openView.doOpen();
 				break;
 			}
