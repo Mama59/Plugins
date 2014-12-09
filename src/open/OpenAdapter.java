@@ -11,5 +11,4 @@ public class OpenAdapter implements OpenListener {
 	public void open() {}
 	@Override
 	public void actionPerformed(ActionEvent e) {}
-
 }

@@ -1,4 +1,4 @@
-package Test.view;
+package Test.open;
 /**
  * Test open view
  * */

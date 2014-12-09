@@ -24,7 +24,7 @@ import model.ModelModifier;
 import plugin.CurrentPlugins;
 import plugin.PluginEvent;
 import plugin.listener.PluginListener;
-import quit.QuitMyAdapter;
+import quit.ExitMyAdapter;
 import save.SaveAdapterView;
 import save.SaveView;
 
@@ -37,9 +37,9 @@ public class WindowsView extends JPanel implements PluginListener{
 
 	private Map<String, JMenuItem> hashItemTool;
 
-	private Map<String, JMenuItem> hashItemHelp;
-
-	private static Model model;
+	protected Map<String, JMenuItem> hashItemHelp;
+	
+	protected static Model model;
 	protected JMenuBar menuBar = new JMenuBar();
 	protected JMenu file = new JMenu("File");
 	protected JMenu tool = new JMenu("Tool");
@@ -55,8 +55,10 @@ public class WindowsView extends JPanel implements PluginListener{
 	protected OpenView openView;
 	protected SaveView saveView;
 	protected KeyModelAdapter keyListener;
-	protected QuitMyAdapter quitListener;
+	protected ExitMyAdapter exitListener;
+	protected KeyAdapterOpenSave textAreaListener;
 	protected JFrame frame;
+	protected KeyAdapterOpenSave listenerOpenSave;
 	/**
 	 * Constructor of the window
 	 * @param model
@@ -67,7 +69,6 @@ public class WindowsView extends JPanel implements PluginListener{
 		this.currentPlugins = currentPlugins;
 		init();
 	}
-
 	
 	/**
 	 * get the current plugin
@@ -76,16 +77,6 @@ public class WindowsView extends JPanel implements PluginListener{
 	public CurrentPlugins getCurrentPlugins() {
 		return currentPlugins;
 	}
-
-	
-	public void setFrame(JFrame frame) {
-		this.frame = frame;
-		JMenuItem quitItem = new JMenuItem("Exit");
-		quitListener = new QuitMyAdapter(frame);
-		quitItem.addActionListener(quitListener);
-		file.add(quitItem);
-	}
-
 
 	/**
 	 * get the model modifier
@@ -111,18 +102,22 @@ public class WindowsView extends JPanel implements PluginListener{
 		openListener = new OpenAdapterView(openView);
 		saveListener = new SaveAdapterView(saveView);
 		
+		
 		mac = new ModelAdapterChange(this);
 		modelModifier.addModelFinderListener(mac);
 		
 		setPreferredSize(new Dimension(800, 800));
 		
 		text = new JTextArea(this.getHeight(), this.getWidth());
+		textAreaListener = new KeyAdapterOpenSave(openView, saveView);
 		keyListener = new KeyModelAdapter(model, text);
+
 		text.addKeyListener(keyListener);
+		text.addKeyListener(textAreaListener);
 		
 		JMenuItem openItem =  new JMenuItem("Open");
 		JMenuItem saveItem =  new JMenuItem("Save");
-
+		
 		saveItem.addActionListener(saveListener);
 		openItem.addActionListener(openListener);
 		
@@ -139,6 +134,8 @@ public class WindowsView extends JPanel implements PluginListener{
 		add(menuBar,"North");
 		add(text,"Center");
 		this.setVisible(true);
+		listenerOpenSave = new KeyAdapterOpenSave(openView, saveView);
+		this.addKeyListener(listenerOpenSave);
 	}
 	/**
 	 * added a plugin 
@@ -213,5 +210,14 @@ public class WindowsView extends JPanel implements PluginListener{
 	{
 		openView.doOpen();
 	}
-
+	/**
+	 * Set Frame
+	 * */
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+		JMenuItem exitItem = new JMenuItem("Exit");
+		exitListener = new ExitMyAdapter(frame);
+		exitItem.addActionListener(exitListener);
+		file.add(exitItem);
+	}
 }

@@ -48,7 +48,6 @@ public class TimerListingMyAdapter extends  TimerListingAdapter {
 	 */
 	public void actionPerformed(ActionEvent event) 
 	{
-		System.out.println(event);
 		Set<String> listClassActual = finder.getContentClass();	
 		Set<Plugin> newPlugins = new HashSet<Plugin>();
 		Set<Plugin> oldPlugins = new HashSet<Plugin>();

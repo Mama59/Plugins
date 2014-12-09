@@ -20,7 +20,6 @@ public class Main {
 
 	public static void main(String[] args) 
 	{
-		
 		String directoryPlugins = "dropins/plugins";
 		File file = new File(directoryPlugins);
 		Model model = new Model();
@@ -37,6 +36,5 @@ public class Main {
 		wv.setFrame(f);
 		f.setVisible(true);
 		f.pack();
-		
 	}
 }

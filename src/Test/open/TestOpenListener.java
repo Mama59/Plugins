@@ -1,4 +1,4 @@
-package Test.view;
+package Test.open;
 
 import org.junit.Before;
 import org.junit.Test;

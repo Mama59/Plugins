@@ -20,7 +20,6 @@ public class SaveAdapterView extends SaveAdapter{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("save");
 		save();
 	}
 

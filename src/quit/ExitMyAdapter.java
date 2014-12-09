@@ -5,10 +5,10 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 
-public class QuitMyAdapter extends QuitAdapter{
+public class ExitMyAdapter extends ExitAdapter{
 	private JFrame frame;
 	
-	public QuitMyAdapter(JFrame frame) {
+	public ExitMyAdapter(JFrame frame) {
 		this.frame = frame;
 	}
 

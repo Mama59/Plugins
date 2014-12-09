@@ -26,7 +26,6 @@ public class MenuAdapterHelp extends MenuAdapter {
 		super.actionPerformed(e);
 		String name = e.getActionCommand();
 		Plugin p = plugins.getPlugin(name);
-		System.out.println(p);
 		if(p != null)
 		{
 			JOptionPane.showMessageDialog(null,p.helpMessage());

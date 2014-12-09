@@ -7,8 +7,7 @@ import java.awt.event.ActionEvent;
 
 
 public class OpenAdapterView extends OpenAdapter{
-	OpenView openView;
-	
+	private OpenView openView;
 	public OpenAdapterView(OpenView openView) {
 		this.openView = openView;
 	}
@@ -22,5 +21,4 @@ public class OpenAdapterView extends OpenAdapter{
 	public void actionPerformed(ActionEvent e) {
 		open();
 	}
-
 }

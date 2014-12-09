@@ -47,7 +47,6 @@ public class SaveView extends JFrame {
 		BufferedWriter lecteurAvecBuffer=null;
 		try {
 			lecteurAvecBuffer = new BufferedWriter (new FileWriter(selectedFile));
-			System.out.println(model.getMyString());
 			lecteurAvecBuffer.write(model.getMyString());
 			lecteurAvecBuffer.close();
 		} catch (FileNotFoundException e) {

@@ -44,12 +44,9 @@ public class OpenView extends JFrame {
 		fileDialog.setSelectedFile(selectedFile);
 		fileDialog.setFileFilter(new FileNameExtensionFilter("TEXT FILES", "txt", "text"));
 		int option = fileDialog.showOpenDialog(this);
-		System.out.println("ok");
 		if (option != JFileChooser.APPROVE_OPTION)
 			return; // User canceled or clicked the dialog's close box.
 		selectedFile = fileDialog.getSelectedFile();
-		System.out.println("accept : " + filterText.accept(selectedFile, selectedFile.getName()));
-		System.out.println(selectedFile);
 		BufferedReader lecteurAvecBuffer=null;
 		String ligne;
 		String text = "";
@@ -57,11 +54,9 @@ public class OpenView extends JFrame {
 			lecteurAvecBuffer = new BufferedReader (new FileReader(selectedFile));
 			while ((ligne = lecteurAvecBuffer.readLine())!=null)
 			{
-				System.out.println(ligne);
 				text += ligne +"\n";
 			}
 			lecteurAvecBuffer.close();
-			System.out.println("modify " + text);
 			modelModifier.changeModel(text);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

@@ -2,7 +2,7 @@ package quit;
 
 import java.awt.event.ActionEvent;
 
-public class QuitAdapter implements QuitListener{
+public class ExitAdapter implements ExitListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
