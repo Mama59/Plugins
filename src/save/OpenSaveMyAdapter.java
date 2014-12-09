@@ -4,7 +4,12 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 
 import open.OpenView;
-
+/**
+ * Open save my adapter
+ * have a saveView
+ * and an openView
+ * and a File to know the ending selectedFile
+ * */
 public class OpenSaveMyAdapter extends OpenSaveAdapter {
 	private SaveView saveView;
 	private OpenView openView;
@@ -14,7 +19,9 @@ public class OpenSaveMyAdapter extends OpenSaveAdapter {
 		this.saveView = saveView;
 		this.openView = openView;
 	}
-
+	/**
+	 * action save and open
+	 * */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -27,13 +34,17 @@ public class OpenSaveMyAdapter extends OpenSaveAdapter {
 			open();
 		}
 	}
-
+	/**
+	 * save function call doSave of saveView
+	 * */
 	@Override
 	public void save() 
 	{
 		selectedFile = saveView.doSave(selectedFile);
 	}
-
+	/**
+	 * open function call doOpen of openView
+	 * */
 	@Override
 	public void open() 
 	{

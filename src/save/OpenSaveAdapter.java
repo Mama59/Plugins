@@ -1,7 +1,9 @@
 package save;
 
 import java.awt.event.ActionEvent;
-
+/**
+ * Open save adapter implement open save listener
+ * */
 public class OpenSaveAdapter implements OpenSaveListener{
 
 	@Override

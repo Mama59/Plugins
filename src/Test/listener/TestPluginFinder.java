@@ -1,4 +1,4 @@
-package Test.plugin.listener;
+package Test.listener;
 
 import static org.junit.Assert.*;
 
