@@ -12,14 +12,19 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import open.OpenAdapterView;
+import open.OpenView;
 import menu.MenuAdapterHelp;
 import menu.MenuAdapterTool;
+import model.KeyModelAdapter;
 import model.Model;
 import model.ModelAdapterChange;
 import model.ModelModifier;
 import plugin.CurrentPlugins;
 import plugin.PluginEvent;
 import plugin.listener.PluginListener;
+import save.SaveAdapterView;
+import save.SaveView;
 
 /**
  * class WindowsView
@@ -43,11 +48,11 @@ public class WindowsView extends JPanel implements PluginListener{
 	protected MenuAdapterTool controleurTool;
 	protected ModelModifier modelModifier;
 	protected ModelAdapterChange mac;
-	protected OpenModifier openModifier;
 	protected OpenAdapterView openListener;
+	protected SaveAdapterView saveListener;
 	protected OpenView openView;
-	//protected JMenuItem save = new JMenuItem("Sauvegarde    ",
-	//		new ImageIcon("src/Image/sauvegarde.png"));
+	protected SaveView saveView;
+	protected KeyModelAdapter keyListener;
 	
 	/**
 	 * Constructor of the window
@@ -57,7 +62,6 @@ public class WindowsView extends JPanel implements PluginListener{
 	public WindowsView(Model model, CurrentPlugins currentPlugins) {
 		WindowsView.model = model;
 		this.currentPlugins = currentPlugins;
-		
 		init();
 	}
 
@@ -92,16 +96,24 @@ public class WindowsView extends JPanel implements PluginListener{
 		controleurTool = new MenuAdapterTool(this);
 		controleurHelp = new MenuAdapterHelp(currentPlugins);
 		openView = new OpenView(model, modelModifier);
+		saveView = new SaveView(model);
 		openListener = new OpenAdapterView(openView);
+		saveListener = new SaveAdapterView(saveView);
 		mac = new ModelAdapterChange(this);
 		modelModifier.addModelFinderListener(mac);
 		
 		setPreferredSize(new Dimension(800, 800));
+		
 		text = new JTextArea(this.getHeight(), this.getWidth());
+		keyListener = new KeyModelAdapter(model, text);
+		text.addKeyListener(keyListener);
 		setLayout(new BorderLayout());
 		JMenuItem openItem =  new JMenuItem("Open");
 		openItem.addActionListener(openListener);
 		file.add(openItem);
+		JMenuItem saveItem =  new JMenuItem("Save");
+		saveItem.addActionListener(saveListener);
+		file.add(saveItem);
 		menuBar.add(file);
 		menuBar.add(tool);
 		menuBar.add(help);

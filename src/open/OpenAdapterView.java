@@ -1,4 +1,4 @@
-package view;
+package open;
 
 import java.awt.event.ActionEvent;
 /**

@@ -1,9 +1,9 @@
-package view;
+package save;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
@@ -12,56 +12,44 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import filter.FilterTextFiles;
 import model.Model;
-import model.ModelModifier;
 
 /**
  * 
  * open a file selection on a jfrmae
  *
  */
-public class OpenView extends JFrame {
+public class SaveView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JFileChooser fileDialog;
-	protected File file, editFile, selectedFile;
+	protected File selectedFile;
 	protected Model model;
 	protected FilterTextFiles filterText;
-	protected ModelModifier modelModifier;
-	public OpenView(Model mod, ModelModifier modifier) {
+	public SaveView(Model mod) {
 		model = mod;
 		filterText = new FilterTextFiles();
-		modelModifier = modifier;
 	}
 /**
  * Open a text file
  */
-	public void doOpen() 
+	public void doSave() 
 	{
 		if (fileDialog == null)
 			fileDialog = new JFileChooser();
 		
-		fileDialog.setDialogTitle("Select File to be Opened");
+		fileDialog.setDialogTitle("Select File to be Saved");
 		fileDialog.setSelectedFile(selectedFile);
 		fileDialog.setFileFilter(new FileNameExtensionFilter("TEXT FILES", "txt", "text"));
-		int option = fileDialog.showOpenDialog(this);
-		System.out.println("ok");
+		int option = fileDialog.showSaveDialog(this);
 		if (option != JFileChooser.APPROVE_OPTION)
 			return; // User canceled or clicked the dialog's close box.
 		selectedFile = fileDialog.getSelectedFile();
-		System.out.println("accept : " + filterText.accept(selectedFile, selectedFile.getName()));
-		System.out.println(selectedFile);
-		BufferedReader lecteurAvecBuffer=null;
-		String ligne;
-		String text = "";
+		BufferedWriter lecteurAvecBuffer=null;
 		try {
-			lecteurAvecBuffer = new BufferedReader (new FileReader(selectedFile));
-			while ((ligne = lecteurAvecBuffer.readLine())!=null)
-			{
-				System.out.println(ligne);
-				text += ligne +"\n";
-			}
+			lecteurAvecBuffer = new BufferedWriter (new FileWriter(selectedFile));
+			System.out.println(model.getMyString());
+			lecteurAvecBuffer.write(model.getMyString());
 			lecteurAvecBuffer.close();
-			modelModifier.changeModel(text);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,6 +57,10 @@ public class OpenView extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			    
+	}
+	public void doSave(File f) 
+	{
+		selectedFile = f;
+		doSave();
 	}
 }

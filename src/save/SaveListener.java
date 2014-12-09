@@ -1,14 +1,14 @@
-package view;
+package save;
 
 import java.awt.event.ActionListener;
 /**
  * interface of openlistener extends actionlistener 
  * */
 
-public interface OpenListener extends ActionListener {
+public interface SaveListener extends ActionListener {
 	/**
 	 * do open 
 	 * */
 	
-	public void open(); 
+	public void save(); 
 }
